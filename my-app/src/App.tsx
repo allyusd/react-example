@@ -1,10 +1,9 @@
-import React, { ReactNode, createContext, useContext, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Profile from './component/Profile';
 import MyButton from './component/MyButton';
-
-const ThemeContext = createContext('');
+import useTheme, { ThemeProvider } from './context/ThemeContext';
 
 function Form() {
   return (
@@ -16,20 +15,18 @@ function Form() {
 }
 
 function Panel({ title, children }: { title:string, children: ReactNode }) {
-  const theme = useContext(ThemeContext);
-  const className = 'panel-' + theme;
+  const className = 'panel-' + useTheme();
   return (
     <section className={className}>
       <h1>{title}</h1>
-      <h2>{theme}</h2>
+      <h2>{useTheme()}</h2>
       {children}
     </section>
   )
 }
 
 function Button({ children }: { children: ReactNode }) {
-  const theme = useContext(ThemeContext);
-  const className = 'button-' + theme;
+  const className = 'button-' + useTheme();
   return (
     <button className={className}>
       {children}
@@ -39,7 +36,6 @@ function Button({ children }: { children: ReactNode }) {
 
 function App() {
   const [count, setCount] = useState(0);
-  const [theme, setTheme] = useState('light');
 
   function handleClick() {
     setCount(count + 1);
@@ -64,19 +60,9 @@ function App() {
         <MyButton count={count} onClick={handleClick} />
         <Profile />
       </header>
-      <ThemeContext.Provider value={theme}>
+      <ThemeProvider>
         <Form />
-        <label>
-          <input
-            type="checkbox"
-            checked={theme === 'dark'}
-            onChange={(e) => {
-              setTheme(e.target.checked ? 'dark' : 'light')
-            }}
-          />
-          Use dark mode
-        </label>
-      </ThemeContext.Provider>
+      </ThemeProvider>
     </div>
   );
 }
