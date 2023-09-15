@@ -1,38 +1,10 @@
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Profile from './component/Profile';
 import MyButton from './component/MyButton';
-import useTheme, { ThemeProvider } from './context/ThemeContext';
-
-function Form() {
-  return (
-    <Panel title="Welcome">
-      <Button>Sign up</Button>
-      <Button>Log in</Button>
-    </Panel>
-  );
-}
-
-function Panel({ title, children }: { title:string, children: ReactNode }) {
-  const className = 'panel-' + useTheme();
-  return (
-    <section className={className}>
-      <h1>{title}</h1>
-      <h2>{useTheme()}</h2>
-      {children}
-    </section>
-  )
-}
-
-function Button({ children }: { children: ReactNode }) {
-  const className = 'button-' + useTheme();
-  return (
-    <button className={className}>
-      {children}
-    </button>
-  );
-}
+import { ThemeProvider } from './context/ThemeContext';
+import Form from './component/Form';
 
 function App() {
   const [count, setCount] = useState(0);
