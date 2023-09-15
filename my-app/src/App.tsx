@@ -1,37 +1,8 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-function Profile() {
-  const user = {
-    name: 'Hedy Lamarr',
-    imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
-    imageSize: 90,
-  };
-
-  return (
-    <>
-      <h1>{user.name}</h1>
-      <img
-        className="avatar"
-        src={user.imageUrl}
-        alt={'Photo of ' + user.name}
-        style={{
-          width: user.imageSize,
-          height: user.imageSize
-        }}
-      />
-    </>
-  )
-}
-
-function MyButton({ count, onClick }: {count: number, onClick: () => void}) {
-  return (
-    <button onClick={onClick}>
-      Clicked {count} times
-    </button>
-  )
-}
+import Profile from './component/Profile';
+import MyButton from './component/MyButton';
 
 function App() {
   const [count, setCount] = useState(0);
