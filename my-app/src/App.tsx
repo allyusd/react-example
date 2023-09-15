@@ -25,22 +25,21 @@ function Profile() {
   )
 }
 
-function MyButton() {
-  const [count, setCount] = useState(0);
-
-  function handleClick() {
-    // alert('You clicked me!');
-    setCount(count + 1);
-  }
-
+function MyButton({ count, onClick }: {count: number, onClick: () => void}) {
   return (
-    <button onClick={handleClick}>
+    <button onClick={onClick}>
       Clicked {count} times
     </button>
   )
 }
 
 function App() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -56,8 +55,8 @@ function App() {
         >
           Learn React
         </a>
-        <MyButton />
-        <MyButton />
+        <MyButton count={count} onClick={handleClick} />
+        <MyButton count={count} onClick={handleClick} />
         <Profile />
       </header>
     </div>
