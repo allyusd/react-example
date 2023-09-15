@@ -39,6 +39,7 @@ function Button({ children }: { children: ReactNode }) {
 
 function App() {
   const [count, setCount] = useState(0);
+  const [theme, setTheme] = useState('light');
 
   function handleClick() {
     setCount(count + 1);
@@ -63,8 +64,18 @@ function App() {
         <MyButton count={count} onClick={handleClick} />
         <Profile />
       </header>
-      <ThemeContext.Provider value="light">
+      <ThemeContext.Provider value={theme}>
         <Form />
+        <label>
+          <input
+            type="checkbox"
+            checked={theme === 'dark'}
+            onChange={(e) => {
+              setTheme(e.target.checked ? 'dark' : 'light')
+            }}
+          />
+          Use dark mode
+        </label>
       </ThemeContext.Provider>
     </div>
   );
